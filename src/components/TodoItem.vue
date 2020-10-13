@@ -1,10 +1,23 @@
 // TodoItem.vue
 
 <template>
-  <div class="todo-item">
-    <h1 :style="'text-decoration :' + (completed ? 'line-through' : '')">{{name}}</h1>
-    <input type="checkbox" v-on:click="completeTask" :value="completed">
-    <button v-on:click="removeTodo">Remove</button>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <button class="button is-danger is-small close-right" v-on:click="removeTodo">X</button>
+          <div class="columns">
+            <div class="column is-four-fifths">
+              <h1 :class="{ 'strike' : completed}">{{name}}</h1>
+              <p>{{description}}
+            </div>
+            <div class="column right">
+              <input type="checkbox" v-on:click="completeTask" :value="completed">
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </template>
 
@@ -12,7 +25,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  props: ['name', 'index'],
+  props: ['name', 'description', 'index'],
   data() {
     return {
       completed: false
@@ -33,7 +46,22 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-.container {
-  color: green;
-}
+  .strike{
+    text-decoration: line-through;
+  }
+
+  .right{
+    align-self: center;
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+  }
+
+  .close-right{
+    border-radius: 100%;
+    position: absolute;
+    right: 0;
+    margin-top: -15px;
+    margin-right: 15px;
+  }
 </style>
